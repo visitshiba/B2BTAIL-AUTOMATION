@@ -1,4 +1,4 @@
-name: Playwright Docker Execution
+name: B2BTail Suite - Docker
 
 on:
   workflow_dispatch:
