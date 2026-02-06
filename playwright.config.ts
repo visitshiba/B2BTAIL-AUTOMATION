@@ -1,7 +1,5 @@
 import { defineConfig } from '@playwright/test';
 import * as dotenv from 'dotenv';
-// import globalSetup from './src/lib/logger/global-setup'; // <- TypeScript import
-
 dotenv.config();
 type BrowserName = 'chromium' | 'firefox' | 'webkit';
 
@@ -43,13 +41,6 @@ if (browserEnv === 'all') {
     projects = [{ name: b, use: { browserName: b } }];
 }
 
-console.log(`>>> Using Browser: ${browserEnv}`);
-console.log(`>>> Resolved Browser: ${projects[0].use.browserName}`);
-console.log(`>>> Headless: ${headless}`);
-console.log(`>>> SlowMo: ${slowMoValue}`);
-console.log(`>>> Workers: ${workers}`);
-console.log(`>>> Retries: ${retryCount}`);
-
 export default defineConfig({
     testDir: './src/tests',
     testMatch: '**/*.ts',
@@ -78,6 +69,7 @@ export default defineConfig({
             slowMo: slowMoValue,
         },
     },
-
     projects,
+    globalSetup: require.resolve('./global-setup'),
+
 });
