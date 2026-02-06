@@ -87,16 +87,7 @@ jobs:
           publish_branch: gh-pages
           destination_dir: allure-report
 
-      # 11. Show report URLs dynamically
-
-      - name: Show report URLs
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-        run: |
-          OWNER=$(echo $GITHUB_REPOSITORY | cut -d'/' -f1)
-          REPO=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)
-          echo "Playwright Report: https://$OWNER.github.io/$REPO/playwright-report/"
-          echo "Allure Report: https://$OWNER.github.io/$REPO/allure-report/"    
-
+      # 11. Show report URLs dynamically in the workflow summary (only master push)  
       - name: Show report URLs in summary
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
