@@ -1,0 +1,3 @@
+Entering email: korey.@gmail.com
+Entering password: [REDACTED]
+Clicking login button

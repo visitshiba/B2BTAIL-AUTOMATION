@@ -1,0 +1,3 @@
+Entering email: Jay93@hotmail.com
+Entering password: [REDACTED]
+Clicking login button

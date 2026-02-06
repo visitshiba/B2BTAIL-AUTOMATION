@@ -1,0 +1,3 @@
+Entering email: emiliegmail.com
+Entering password: [REDACTED]
+Clicking login button

@@ -1,0 +1,3 @@
+Clicking forgot password link
+Entering email: Dejah_Hilll31@yahoo.com
+Clicking send link button

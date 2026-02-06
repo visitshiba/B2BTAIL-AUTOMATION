@@ -1,0 +1,3 @@
+Entering email: Jayden92@yahoo.com
+Entering password: [REDACTED]
+Clicking login button

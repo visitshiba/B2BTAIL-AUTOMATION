@@ -1,0 +1,3 @@
+Entering email: holden@
+Entering password: [REDACTED]
+Clicking login button

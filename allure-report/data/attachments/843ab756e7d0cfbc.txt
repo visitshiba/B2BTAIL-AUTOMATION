@@ -1,0 +1,3 @@
+Entering email: bennie@@gmail.com
+Entering password: [REDACTED]
+Clicking login button
