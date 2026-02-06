@@ -57,10 +57,12 @@ jobs:
           publish_dir: ./playwright-report
           publish_branch: gh-pages
           destination_dir: playwright-report
+
+      # 8. Install Allure CLI globally for CI
       - name: Install Allure CLI
         run: npm install -g allure-commandline    
 
-      # 8. Generate Allure HTML report (only master push)
+      # 8a. Generate Allure HTML report (only master push)
       - name: Generate Allure HTML Report
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
@@ -84,3 +86,13 @@ jobs:
           publish_dir: ./allure-report
           publish_branch: gh-pages
           destination_dir: allure-report
+
+      # 11. Show report URLs dynamically
+
+      - name: Show report URLs
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          OWNER=$(echo $GITHUB_REPOSITORY | cut -d'/' -f1)
+          REPO=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)
+          echo "Playwright Report: https://$OWNER.github.io/$REPO/playwright-report/"
+          echo "Allure Report: https://$OWNER.github.io/$REPO/allure-report/"    
