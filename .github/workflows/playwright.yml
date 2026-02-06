@@ -69,7 +69,13 @@ jobs:
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
           mkdir -p allure-report
+          git clone --branch gh-pages https://github.com/${GITHUB_REPOSITORY}.git gh-pages-temp
+          if [ -d "gh-pages-temp/allure-report/history" ]; then
+            echo "Copying previous Allure history..."
+            cp -r gh-pages-temp/allure-report/history ./allure-report/
+          fi
           npx allure generate allure-results --clean -o allure-report
+          rm -rf gh-pages-temp
 
       # 9. Upload Allure Test Results as artifact (always)
       - name: Upload Allure Test Results
