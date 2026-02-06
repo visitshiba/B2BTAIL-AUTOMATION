@@ -1,0 +1,3 @@
+Entering email: ryangmail.com
+Entering password: [REDACTED]
+Clicking login button

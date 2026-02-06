@@ -1,0 +1,3 @@
+Entering email: tia@do#main.com
+Entering password: [REDACTED]
+Clicking login button

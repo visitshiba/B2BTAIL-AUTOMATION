@@ -1,0 +1,3 @@
+Clicking forgot password link
+Entering email: Britney.Schaefer0@hotmail.com
+Clicking send link button

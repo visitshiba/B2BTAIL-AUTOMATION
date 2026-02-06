@@ -1,0 +1,3 @@
+Entering email: maribel@gmail
+Entering password: [REDACTED]
+Clicking login button

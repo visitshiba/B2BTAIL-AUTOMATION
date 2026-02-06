@@ -1,0 +1,3 @@
+Entering email: Danial_Jast96@gmail.com
+Entering password: [REDACTED]
+Clicking login button

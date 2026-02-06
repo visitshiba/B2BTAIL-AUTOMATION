@@ -1,3 +1,0 @@
-Entering email: Tristian45@hotmail.com
-Entering password: [REDACTED]
-Clicking login button

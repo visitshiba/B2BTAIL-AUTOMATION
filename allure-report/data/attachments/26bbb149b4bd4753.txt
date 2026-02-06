@@ -1,0 +1,3 @@
+Entering email: daphnee@
+Entering password: [REDACTED]
+Clicking login button

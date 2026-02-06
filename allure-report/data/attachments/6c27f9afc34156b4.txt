@@ -1,0 +1,3 @@
+Entering email: clare@@gmail.com
+Entering password: [REDACTED]
+Clicking login button

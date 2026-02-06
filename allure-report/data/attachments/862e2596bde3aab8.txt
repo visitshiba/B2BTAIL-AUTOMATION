@@ -1,0 +1,2 @@
+Entering password: [REDACTED]
+Clicking show/hide password toggle

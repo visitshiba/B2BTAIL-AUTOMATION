@@ -1,0 +1,3 @@
+Entering email: Miller68@gmail.com
+Entering password: [REDACTED]
+Clicking login button
