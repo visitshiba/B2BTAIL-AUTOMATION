@@ -57,6 +57,8 @@ jobs:
           publish_dir: ./playwright-report
           publish_branch: gh-pages
           destination_dir: playwright-report
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline    
 
       # 8. Generate Allure HTML report (only master push)
       - name: Generate Allure HTML Report
