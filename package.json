@@ -5,6 +5,7 @@
   "scripts": {
     "docker:build": "docker build --no-cache -t b2btail-playwright .",
     "docker:test": "docker run --rm -v $(pwd)/playwright-report:/app/playwright-report b2btail-playwright",
+    "docker:test:split": "ls src/tests/*.spec.ts | xargs -I {} docker run --rm b2btail-playwright npx playwright test {}",
     "clean:allure": "rm -rf allure-results allure-report",
     "test": "npm run clean:allure && playwright test",
     "test:headed": "playwright test --headed",
