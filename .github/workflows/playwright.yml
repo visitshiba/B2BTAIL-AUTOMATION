@@ -10,6 +10,7 @@ on:
 
 jobs:
   test:
+    if: github.ref != 'refs/heads/gh-pages'
     runs-on: ubuntu-latest
 
     steps:
@@ -94,6 +95,7 @@ jobs:
           publish_dir: ./allure-report
           publish_branch: gh-pages
           destination_dir: allure-report
+          force_orphan: true
 
       # 11. Show report URLs dynamically in the workflow summary (only master push)  
       - name: Show report URLs in summary
