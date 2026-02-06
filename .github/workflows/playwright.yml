@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+    # ignore gh-pages branch
+    # any push to gh-pages won't trigger the workflow
+    branches-ignore:
+      - gh-pages
   pull_request:
 
 jobs:
