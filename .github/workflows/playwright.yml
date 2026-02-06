@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # your Node.js version
+          node-version: '20'
 
       # 3. Install dependencies
       - name: Install dependencies
@@ -33,7 +33,7 @@ jobs:
       - name: Run Playwright tests
         run: npx playwright test
 
-      # 6. Upload Playwright Test Results (optional)
+      # 6. Upload Playwright Test Results as artifact (always)
       - name: Upload Playwright Test Results
         if: always()
         uses: actions/upload-artifact@v4
@@ -41,24 +41,24 @@ jobs:
           name: playwright-results
           path: playwright-report/
 
-      # 7. Publish Playwright HTML report to GitHub Pages
+      # 7. Publish Playwright HTML report to GitHub Pages (only master push)
       - name: Publish Playwright Report
-        if: always()
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
-         github_token: ${{ secrets.GH_PAGES_TOKEN }}
-         publish_dir: ./playwright-report    
-         publish_branch: gh-pages
-         destination_dir: playwright-report
+          github_token: ${{ secrets.GH_PAGES_TOKEN }}
+          publish_dir: ./playwright-report
+          publish_branch: gh-pages
+          destination_dir: playwright-report
 
-      # 8. Generate Allure HTML report
+      # 8. Generate Allure HTML report (only master push)
       - name: Generate Allure HTML Report
-        if: always()
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         run: |
           mkdir -p allure-report
           allure generate allure-results --clean -o allure-report
 
-      # 9. Upload Allure report as artifact (optional)
+      # 9. Upload Allure Test Results as artifact (always)
       - name: Upload Allure Test Results
         if: always()
         uses: actions/upload-artifact@v4
@@ -66,9 +66,9 @@ jobs:
           name: allure-results
           path: allure-report/
 
-      # 10. Publish Allure HTML report to GitHub Pages
+      # 10. Publish Allure HTML report to GitHub Pages (only master push)
       - name: Publish Allure Report
-        if: always()
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GH_PAGES_TOKEN }}
