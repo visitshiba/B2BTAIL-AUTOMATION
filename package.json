@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "docker": "docker build -t pw-tests .",
+    "docker:build": "docker build --no-cache -t b2btail-playwright .",
+    "docker:test": "docker run --rm -v $(pwd)/playwright-report:/app/playwright-report b2btail-playwright",
     "clean:allure": "rm -rf allure-results allure-report",
     "test": "npm run clean:allure && playwright test",
     "test:headed": "playwright test --headed",
