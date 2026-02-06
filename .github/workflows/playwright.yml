@@ -4,10 +4,6 @@ on:
   push:
     branches:
       - master
-    # ignore gh-pages branch
-    # any push to gh-pages won't trigger the workflow
-    branches-ignore:
-      - gh-pages
   pull_request:
 
 jobs:
@@ -100,3 +96,15 @@ jobs:
           REPO=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)
           echo "Playwright Report: https://$OWNER.github.io/$REPO/playwright-report/"
           echo "Allure Report: https://$OWNER.github.io/$REPO/allure-report/"    
+
+      - name: Show report URLs in summary
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: |
+          OWNER=$(echo $GITHUB_REPOSITORY | cut -d'/' -f1)
+          REPO=$(echo $GITHUB_REPOSITORY | cut -d'/' -f2)
+          PLAYWRIGHT_URL="https://$OWNER.github.io/$REPO/playwright-report/"
+          ALLURE_URL="https://$OWNER.github.io/$REPO/allure-report/"
+          
+          echo "### Test Reports" >> $GITHUB_STEP_SUMMARY
+          echo "- [Playwright Report]($PLAYWRIGHT_URL)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Allure Report]($ALLURE_URL)" >> $GITHUB_STEP_SUMMARY
