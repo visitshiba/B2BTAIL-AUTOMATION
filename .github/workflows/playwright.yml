@@ -36,7 +36,7 @@ jobs:
       # 6. Upload Playwright Test Results (optional)
       - name: Upload Test Results
         if: always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: playwright-results
           path: playwright-report/
