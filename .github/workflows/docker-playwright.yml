@@ -1,0 +1,61 @@
+name: Playwright Docker Execution
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  docker-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Build Docker image
+      - name: Build Docker image
+        run: docker build -t b2btail-playwright .
+
+      # 3. Run tests inside container
+      - name: Run Playwright tests in Docker
+        run: |
+          docker run --name test-container \
+            -v ${{ github.workspace }}/playwright-report:/app/playwright-report \
+            -v ${{ github.workspace }}/allure-results:/app/allure-results \
+            b2btail-playwright
+
+      # 4. Upload Playwright report
+      - name: Upload Playwright Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-playwright-report
+          path: playwright-report/
+
+      # 5. Upload Allure results
+      - name: Upload Allure Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-allure-results
+          path: allure-results/
+
+      # 6. Install Allure CLI and generate report
+      - name: Install Allure CLI
+        run: npm install -g allure-commandline
+
+      - name: Generate Allure Report
+        run: |
+          allure generate allure-results --clean -o allure-report
+
+      # 7. Publish Allure HTML report to GitHub Pages (only master push)
+      - name: Upload Allure HTML Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-allure-report
+          path: allure-report/   
+
