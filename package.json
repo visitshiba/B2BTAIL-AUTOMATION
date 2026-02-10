@@ -4,18 +4,14 @@
   "private": true,
   "scripts": {
     "docker:build": "docker build --no-cache -t b2btail-playwright .",
-    "docker:test": "docker run --rm -v $(pwd)/playwright-report:/app/playwright-report b2btail-playwright",
-    "docker:test:split": "ls src/tests/*.spec.ts | xargs -I {} docker run --rm b2btail-playwright npx playwright test {}",
+    "docker:test": "docker run --rm -v %cd%/playwright-report:/app/playwright-report b2btail-playwright",
+    "docker:test:shard": "ts-node src/scripts/run-docker.ts",
     "clean:allure": "rm -rf allure-results allure-report",
     "test": "npm run clean:allure && playwright test",
-    "test:headed": "playwright test --headed",
-    "test:debug": "PWDEBUG=1 playwright test",
-    "test:report": "playwright show-report",
     "lint": "eslint . --ext .ts",
     "build": "tsc -p tsconfig.json",
-    "ci": "playwright test --reporter=list --workers=2",
-    "report": "allure serve allure-results",
-    "report:default": "npx playwright show-report"
+    "report:allure": "allure serve allure-results",
+    "report": "npx playwright show-report"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.9.0",

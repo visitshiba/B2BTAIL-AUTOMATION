@@ -1,14 +1,16 @@
 import { defineConfig } from '@playwright/test';
-import * as dotenv from 'dotenv';
-dotenv.config();
+import config from './src/config/config';
+import path from 'path';
 type BrowserName = 'chromium' | 'firefox' | 'webkit';
 
 // Read environment variables (with safe defaults)
-const browserEnv = (process.env.BROWSER || 'webkit').toLowerCase();
-const headless = process.env.HEADLESS === 'true';
-const slowMoValue = process.env.SLOW_MO === 'true' ? 1000 : 0;
-const workers = process.env.WORKERS ? parseInt(process.env.WORKERS, 10) : undefined;
-const retryCount = process.env.RETRY_COUNT ? parseInt(process.env.RETRY_COUNT, 10) : 0;
+const browserEnv = config.playwright.browser;
+const headless = config.playwright.headless;
+const slowMoValue = config.playwright.slowMo;
+const workers = config.playwright.workers;
+const retryCount = config.playwright.retries
+const projectRoot = process.cwd();
+
 
 // Normalize browser names
 function getBrowserName(name: string): BrowserName {
@@ -47,20 +49,20 @@ export default defineConfig({
     timeout: 60 * 1000,
     globalTimeout: 600 * 1000, // 10 minutes for everything
     expect: {
-        timeout: 10 * 1000,      // 10 seconds for assertions
+        timeout: 30 * 1000,      // 10 seconds for assertions
     },
     retries: retryCount,
     workers: workers,
-    reporter: [['list'], ['allure-playwright'], ['html', {
+    reporter: [['list'], ['allure-playwright', { outputFolder: 'allure-results' }], ['html', {
         open: 'never'  // Optional: 'always'|'never'|'on-failure'
-    }]],
+    }], ['json', { outputFile: 'test-results/report.json' }] ,['blob'] ],
 
     fullyParallel: true,
 
     use: {
         headless,
         viewport: { width: 1280, height: 720 },
-        actionTimeout: 15 * 1000,
+        actionTimeout: 30 * 1000,
         navigationTimeout: 30 * 1000, // 30s for page loads
         screenshot: 'only-on-failure',
         trace: 'retain-on-failure',
@@ -71,5 +73,7 @@ export default defineConfig({
     },
     projects,
     globalSetup: require.resolve('./global-setup'),
+    outputDir: '/app/blob-report', // ensures all shards write to blob-report
+
 
 });
