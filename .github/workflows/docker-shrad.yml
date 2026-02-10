@@ -70,22 +70,20 @@ jobs:
                   merge-multiple: true
 
             - name: List merged files
-              run: ls -R ./merged-results   
-            
+              run: ls -R ./merged-results
+
             - name: Merge Playwright Reports
               run: |
-                  # 1. Create the results.json file by redirecting stdout
-                  npx playwright merge-reports ./merged-results --reporter=json > results.json
-
-                  # 2. Create the playwright-report folder
-                  npx playwright merge-reports ./merged-results --reporter=html --output playwright-report
+                  # Point specifically to the blob-report subfolder
+                  npx playwright merge-reports ./merged-results/blob-report --reporter=json > results.json
+                  npx playwright merge-reports ./merged-results/blob-report --reporter=html --output playwright-report
               env:
                   PLAYWRIGHT_HTML_OPEN: never
 
             - name: Generate Allure Report
               run: |
-                  # Allure can also read directly from the download folder
-                  npx allure generate ./merged-results --clean -o allure-report
+                  # Point specifically to the allure-results subfolder
+                  npx allure generate ./merged-results/allure-results --clean -o allure-report
 
             - name: Upload Final Consolidated Reports
               if: always()
