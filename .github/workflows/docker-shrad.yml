@@ -50,7 +50,6 @@ jobs:
 
   # Job 3: Merge and Report
   merge-reports:
-    if: always()
     needs: [docker-test]
     runs-on: ubuntu-latest
     steps:
@@ -58,31 +57,23 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-
       - name: Install dependencies
         run: npm ci
-
-      - name: Download all shard artifacts
+      
+      - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           pattern: all-results-shard-*
           path: merged-results
           merge-multiple: true
 
-      - name: Merge Playwright Reports
+      # Use your package.json scripts!
+      - name: Merge Playwright
         run: |
-          npx playwright merge-reports ./merged-results --reporter=html,json
-          # Note: JSON will be piped or saved based on your config
-
-      - name: Generate Allure Report
+          mv merged-results/* blob-report/  # Move zips to where script expects
+          npm run report:merge
+      
+      - name: Generate Allure
         run: |
-          npx allure generate ./merged-results --clean -o allure-report
-
-      - name: Upload Final Reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: final-combined-reports
-          path: |
-            playwright-report/
-            allure-report/
-            results.json
+          mv merged-results/* allure-results/ # Move allure data
+          npm run report:allure:gen
