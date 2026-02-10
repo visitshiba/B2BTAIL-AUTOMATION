@@ -84,7 +84,7 @@ Promise.all(shardPromises).then(() => {
         execSync('npx allure generate allure-results --clean -o allure-report', { stdio: 'inherit' });
 
         console.log('Generating playwright report...');
-        execSync('npx playwright merge-reports ./blob-report --reporter=html', { stdio: 'inherit' });
+        execSync('npx playwright merge-reports ./blob-report --reporter=html', { stdio: 'inherit',env: { ...process.env, PLAYWRIGHT_HTML_OPEN: 'never' } });
 
         console.log('Report generation completed successfully.');
     } catch (err) {

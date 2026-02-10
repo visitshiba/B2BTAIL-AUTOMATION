@@ -6,3 +6,4 @@ test-results/
 dist/
 .env
 /blob-report/
+results.json
