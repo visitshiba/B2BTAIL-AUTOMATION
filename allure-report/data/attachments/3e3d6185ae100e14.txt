@@ -1,0 +1,3 @@
+Entering email: hollis@gmail
+Entering password: [REDACTED]
+Clicking login button

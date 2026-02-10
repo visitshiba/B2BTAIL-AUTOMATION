@@ -1,3 +1,0 @@
-Entering email: dawson@
-Entering password: [REDACTED]
-Clicking login button

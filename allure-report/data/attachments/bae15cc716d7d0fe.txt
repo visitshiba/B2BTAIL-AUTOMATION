@@ -1,3 +1,0 @@
-Clicking forgot password link
-Entering email: Katrine.Bayer@gmail.com
-Clicking send link button

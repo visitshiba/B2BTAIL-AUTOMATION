@@ -1,0 +1,3 @@
+Entering email: blanchegmail.com
+Entering password: [REDACTED]
+Clicking login button

@@ -1,0 +1,3 @@
+Entering email: Walton35@hotmail.com
+Entering password: [REDACTED]
+Clicking login button

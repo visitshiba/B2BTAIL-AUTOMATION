@@ -1,3 +1,0 @@
-Entering email: keara@@gmail.com
-Entering password: [REDACTED]
-Clicking login button

@@ -1,3 +1,0 @@
-Entering email: richa@1234.com
-Entering password: [REDACTED]
-Clicking login button
