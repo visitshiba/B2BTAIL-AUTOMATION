@@ -1,79 +1,98 @@
 name: B2BTail Suite - Docker Sharded
 
 on:
-  workflow_dispatch:
-  push:
-    branches: [master]
+    workflow_dispatch:
+    push:
+        branches: [master]
 
 jobs:
-  # Job 1: Build the image once and cache it (Optional but recommended)
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Build Docker image
-        run: docker build -t b2btail-playwright .
-      # In a real CI, you'd push this to a Registry (GHCR), 
-      # but for simplicity, we'll rebuild per shard or use a single job logic.
+    # Job 1: Build the image once and cache it (Optional but recommended)
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - name: Build Docker image
+              run: docker build -t b2btail-playwright .
+            # In a real CI, you'd push this to a Registry (GHCR),
+            # but for simplicity, we'll rebuild per shard or use a single job logic.
 
-  # Job 2: Run Shards in Parallel
-  docker-test:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false # Don't stop other shards if one fails
-      matrix:
-        shard: [1, 2] # Set your total shards here
-    steps:
-      - uses: actions/checkout@v4
-      
-      - name: Build Docker image
-        run: docker build -t b2btail-playwright .
+    # Job 2: Run Shards in Parallel
+    docker-test:
+        runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false # Don't stop other shards if one fails
+            matrix:
+                shard: [1, 2] # Set your total shards here
+        steps:
+            - uses: actions/checkout@v4
 
-      - name: Run Playwright Shard ${{ matrix.shard }}
-        run: |
-          docker run --name test-shard-${{ matrix.shard }} \
-            -v ${{ github.workspace }}/allure-results:/app/allure-results \
-            -v ${{ github.workspace }}/blob-report:/app/blob-report \
-            b2btail-playwright \
-            npx playwright test --shard=${{ matrix.shard }}/2 --reporter=blob,allure-playwright
+            - name: Build Docker image
+              run: docker build -t b2btail-playwright .
 
-      # Upload "blobs" and "allure-results" from this specific shard
-      - name: Upload Shard Artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: all-results-shard-${{ matrix.shard }}
-          path: |
-            blob-report/
-            allure-results/
-          retention-days: 1
+            - name: Run Playwright Shard ${{ matrix.shard }}
+              run: |
+                  docker run --name test-shard-${{ matrix.shard }} \
+                    -v ${{ github.workspace }}/allure-results:/app/allure-results \
+                    -v ${{ github.workspace }}/blob-report:/app/blob-report \
+                    b2btail-playwright \
+                    npx playwright test --shard=${{ matrix.shard }}/2 --reporter=blob,allure-playwright
 
-  # Job 3: Merge and Report
-  merge-reports:
-    needs: [docker-test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Download artifacts
-        uses: actions/download-artifact@v4
-        with:
-          pattern: all-results-shard-*
-          path: merged-results
-          merge-multiple: true
+            # Upload "blobs" and "allure-results" from this specific shard
+            - name: Upload Shard Artifacts
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: all-results-shard-${{ matrix.shard }}
+                  path: |
+                      blob-report/
+                      allure-results/
+                  retention-days: 1
 
-      # Use your package.json scripts!
-      - name: Merge Playwright
-        run: |
-          mv merged-results/* blob-report/  # Move zips to where script expects
-          npm run report:merge
-      
-      - name: Generate Allure
-        run: |
-          mv merged-results/* allure-results/ # Move allure data
-          npm run report:allure:gen
+    # Job 3: Merge and Report
+    merge-reports:
+        if: always() # Ensure reports generate even if tests failed
+        needs: [docker-test]
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Download artifacts
+              uses: actions/download-artifact@v4
+              with:
+                  pattern: all-results-shard-*
+                  path: merged-results
+                  merge-multiple: true
+
+            - name: List merged files
+              run: ls -R ./merged-results   
+            
+            - name: Merge Playwright Reports
+              run: |
+                  # 1. Create the results.json file by redirecting stdout
+                  npx playwright merge-reports ./merged-results --reporter=json > results.json
+
+                  # 2. Create the playwright-report folder
+                  npx playwright merge-reports ./merged-results --reporter=html --output playwright-report
+              env:
+                  PLAYWRIGHT_HTML_OPEN: never
+
+            - name: Generate Allure Report
+              run: |
+                  # Allure can also read directly from the download folder
+                  npx allure generate ./merged-results --clean -o allure-report
+
+            - name: Upload Final Consolidated Reports
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: final-combined-reports
+                  path: |
+                      playwright-report/
+                      allure-report/
+                      results.json
