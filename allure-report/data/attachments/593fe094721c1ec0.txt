@@ -1,0 +1,3 @@
+Clicking forgot password link
+Entering email: Brain92@gmail.com
+Clicking send link button

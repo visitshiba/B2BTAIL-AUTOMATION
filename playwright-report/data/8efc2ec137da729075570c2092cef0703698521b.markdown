@@ -1,0 +1,175 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - heading "B2Btail" [level=1] [ref=e6]
+        - navigation [ref=e7]:
+          - list [ref=e8]:
+            - listitem [ref=e9]:
+              - link "Business Info" [ref=e10] [cursor=pointer]:
+                - /url: /business-info
+                - img [ref=e11]
+                - generic [ref=e15]: Business Info
+            - listitem [ref=e16]:
+              - link "SO vs So What" [ref=e17] [cursor=pointer]:
+                - /url: /so-vs-what
+                - img [ref=e18]
+                - generic [ref=e21]: SO vs So What
+            - listitem [ref=e22]:
+              - link "Rounding the Bases" [ref=e23] [cursor=pointer]:
+                - /url: /rounding-the-bases
+                - img [ref=e24]
+                - generic [ref=e28]: Rounding the Bases
+            - listitem [ref=e29]:
+              - link "Soulmate" [ref=e30] [cursor=pointer]:
+                - /url: /soulmate
+                - img [ref=e31]
+                - generic [ref=e36]: Soulmate
+            - listitem [ref=e37]:
+              - link "Soulmate Success Path" [ref=e38] [cursor=pointer]:
+                - /url: /success-path
+                - img [ref=e39]
+                - generic [ref=e43]: Soulmate Success Path
+            - listitem [ref=e44]:
+              - link "Soulmate 100" [ref=e45] [cursor=pointer]:
+                - /url: /soulmate-100
+                - img [ref=e46]
+                - generic [ref=e48]: Soulmate 100
+            - listitem [ref=e49]:
+              - link "Competitor Analysis" [ref=e50] [cursor=pointer]:
+                - /url: /competitor
+                - img [ref=e51]
+                - generic [ref=e53]: Competitor Analysis
+            - listitem [ref=e54]:
+              - link "RIKs Keywords" [ref=e55] [cursor=pointer]:
+                - /url: /riks-keywords
+                - img [ref=e56]
+                - generic [ref=e59]: RIKs Keywords
+            - listitem [ref=e60]:
+              - link "RIQs Questions" [ref=e61] [cursor=pointer]:
+                - /url: /riqs-questions
+                - img [ref=e62]
+                - generic [ref=e64]: RIQs Questions
+            - listitem [ref=e65]:
+              - link "Hub & Spoke" [ref=e66] [cursor=pointer]:
+                - /url: /hub-spoke
+                - img [ref=e67]
+                - generic [ref=e70]: Hub & Spoke
+            - listitem [ref=e71]:
+              - link "Content Calendar" [ref=e72] [cursor=pointer]:
+                - /url: /content-calendar
+                - img [ref=e73]
+                - generic [ref=e75]: Content Calendar
+            - listitem [ref=e76]:
+              - link "Content Planner" [ref=e77] [cursor=pointer]:
+                - /url: /content-planner
+                - img [ref=e78]
+                - generic [ref=e80]: Content Planner
+            - listitem [ref=e81]:
+              - link "Project Notes" [ref=e82] [cursor=pointer]:
+                - /url: /project-notes
+                - img [ref=e83]
+                - generic [ref=e86]: Project Notes
+            - listitem [ref=e87]:
+              - link "Project Tasks" [ref=e88] [cursor=pointer]:
+                - /url: /task-board
+                - img [ref=e89]
+                - generic [ref=e91]: Project Tasks
+            - listitem [ref=e92]:
+              - link "Accounts" [ref=e93] [cursor=pointer]:
+                - /url: /accounts
+                - img [ref=e94]
+                - generic [ref=e97]: Accounts
+            - listitem [ref=e98]:
+              - link "Persons" [ref=e99] [cursor=pointer]:
+                - /url: /persons
+                - img [ref=e100]
+                - generic [ref=e104]: Persons
+            - listitem [ref=e105]:
+              - link "Deals" [ref=e106] [cursor=pointer]:
+                - /url: /deals
+                - img [ref=e107]
+                - generic [ref=e112]: Deals
+            - listitem [ref=e113]:
+              - link "Learning Center" [ref=e114] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e115]
+                - generic [ref=e117]: Learning Center
+            - listitem [ref=e118]:
+              - link "Download DGP Data" [ref=e119] [cursor=pointer]:
+                - /url: /download
+                - img [ref=e120]
+                - generic [ref=e123]: Download DGP Data
+        - button "RI richa@1234.com Wiegand Inc" [ref=e125]:
+          - generic [ref=e126]: RI
+          - generic [ref=e127]:
+            - paragraph [ref=e128]: richa@1234.com
+            - paragraph [ref=e129]: Wiegand Inc
+          - img [ref=e130]
+    - main [ref=e134]:
+      - generic [ref=e135]:
+        - generic [ref=e136]:
+          - heading "Hi 👋" [level=1] [ref=e137]
+          - button "Edit Profile" [ref=e139] [cursor=pointer]:
+            - img
+            - text: Edit Profile
+        - paragraph [ref=e140]: Review and manage your business information.
+      - generic [ref=e141]:
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - img [ref=e145]
+            - generic [ref=e148]: Basic Information
+          - generic [ref=e150]:
+            - generic [ref=e151]:
+              - text: Full Name
+              - paragraph [ref=e155]: Kindly do not switch the page, data is being loaded
+            - generic [ref=e156]:
+              - text: Email
+              - paragraph [ref=e160]: Kindly do not switch the page, data is being loaded
+            - generic [ref=e161]:
+              - text: Phone
+              - paragraph [ref=e165]: Kindly do not switch the page, data is being loaded
+        - generic [ref=e166]:
+          - generic [ref=e167]:
+            - img [ref=e169]
+            - generic [ref=e173]: Business Details
+          - generic [ref=e175]:
+            - generic [ref=e176]:
+              - text: Business Name
+              - paragraph [ref=e180]: Kindly do not switch the page, data is being loaded
+            - generic [ref=e181]:
+              - text: Industry Niche
+              - paragraph [ref=e185]: Kindly do not switch the page, data is being loaded
+            - generic [ref=e186]:
+              - text: Website
+              - paragraph [ref=e190]: Kindly do not switch the page, data is being loaded
+        - generic [ref=e191]:
+          - generic [ref=e192]:
+            - img [ref=e194]
+            - generic [ref=e197]: Location
+          - generic [ref=e199]:
+            - generic [ref=e200]:
+              - text: Geographical Area Served
+              - paragraph [ref=e204]: Kindly do not switch the page, data is being loaded
+            - generic [ref=e205]:
+              - text: Country
+              - paragraph [ref=e209]: Kindly do not switch the page, data is being loaded
+        - generic [ref=e210]:
+          - generic [ref=e211]:
+            - img [ref=e213]
+            - generic [ref=e216]: Business Description
+          - generic [ref=e219]:
+            - text: Description
+            - paragraph [ref=e223]: Kindly do not switch the page, data is being loaded
+  - region "Notifications alt+T":
+    - list:
+      - listitem [ref=e224]:
+        - img [ref=e226]
+        - generic [ref=e228]:
+          - generic [ref=e229]: Hi 👋
+          - generic [ref=e230]: Welcome back!
+  - alert [ref=e231]
+```

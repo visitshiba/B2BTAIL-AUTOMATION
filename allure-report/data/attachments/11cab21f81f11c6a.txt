@@ -1,0 +1,3 @@
+Entering email: Emilio.Dare23@yahoo.com
+Entering password: [REDACTED]
+Clicking login button

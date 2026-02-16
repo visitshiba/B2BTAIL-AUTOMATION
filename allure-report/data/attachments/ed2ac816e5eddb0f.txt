@@ -1,3 +1,0 @@
-Entering email: germaine@do#main.com
-Entering password: [REDACTED]
-Clicking login button
