@@ -1,4 +1,4 @@
-# playwright-master
+# playwright-automation
 
 ## Overview
 This repository contains an end-to-end test automation framework built with Playwright and TypeScript. It exercises automation scenarios for websites such as `https://automationexercise.com/` using the Page Object Model (POM) and common automation best practices.
